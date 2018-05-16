@@ -46,9 +46,9 @@ public class AbrangenciaLogistica extends BaseTest {
 
             String teste = "Inserir Abrangência Logística";
 
-            var Validacao = ConfigurationManager.AppSettings["MsgInclui"];
-
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+//            var Validacao = ConfigurationManager.AppSettings["MsgInclui"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
             AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
 
@@ -56,7 +56,7 @@ public class AbrangenciaLogistica extends BaseTest {
 
             AbrangLogisticaPage.Aguardaid(campocodvenda);
 
-            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha.CodVendaProduto);
+//            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha.CodVendaProduto);
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
 
@@ -78,11 +78,11 @@ public class AbrangenciaLogistica extends BaseTest {
 
             AbrangLogisticaPage.Aguardaid("incluirForm");
 
-            AbrangLogisticaPage.SelecionaMaterial(campomaterial , linhaplanilha.Material);
-
-            AbrangLogisticaPage.InserePrioridade(campoprioridade, linhaplanilha.Prioridade);
-
-            AbrangLogisticaPage.InsereCiclo(campocicloinicial , linhaplanilha.CicloInicio);
+//            AbrangLogisticaPage.SelecionaMaterial(campomaterial , linhaplanilha.Material);
+//
+//            AbrangLogisticaPage.InserePrioridade(campoprioridade, linhaplanilha.Prioridade);
+//
+//            AbrangLogisticaPage.InsereCiclo(campocicloinicial , linhaplanilha.CicloInicio);
 
             AbrangLogisticaPage.Incluir("btnAddSessionItem");
 
@@ -100,7 +100,7 @@ public class AbrangenciaLogistica extends BaseTest {
             Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado,  Validacao, teste);
+//            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado,  Validacao, teste);
          
         }
      
@@ -113,12 +113,12 @@ public class AbrangenciaLogistica extends BaseTest {
 
             String teste = "Aprovar Abrangência Logística";
 
-            var Validacao = ConfigurationManager.AppSettings["MsgAprovaLog"];
-
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+//            var Validacao = ConfigurationManager.AppSettings["MsgAprovaLog"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
       
-            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste , acao );
+//            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste , acao );
 
 
         }
@@ -132,12 +132,12 @@ public class AbrangenciaLogistica extends BaseTest {
 
             String acao = "cancelar";
 
-            String Validacao = ConfigurationManager.AppSettings["MsgCancelLog"];
+//            String Validacao = ConfigurationManager.AppSettings["MsgCancelLog"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-
-            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste , acao );
+//            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste , acao );
         }
 
         public void SalvarAbrangLog()
@@ -147,16 +147,16 @@ public class AbrangenciaLogistica extends BaseTest {
             String teste = "Alterar e salvar Abrangência Logística";
 
    
-            var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
-
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+//            var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
             
             AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
 
             AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
 
-            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha.CodVendaProduto);
+//            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha.CodVendaProduto);
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
 
@@ -190,11 +190,11 @@ public class AbrangenciaLogistica extends BaseTest {
 
             AbrangLogisticaPage.acao("btnRemoveSessionItems");
 
-            AbrangLogisticaPage.SelecionaMaterial(campomaterial, linhaplanilha.Material);
-
-            AbrangLogisticaPage.InserePrioridade(campoprioridade,linhaplanilha.Prioridade);
-
-            AbrangLogisticaPage.InsereCiclo(campocicloinicial ,linhaplanilha.CicloInicio);
+//            AbrangLogisticaPage.SelecionaMaterial(campomaterial, linhaplanilha.Material);
+//
+//            AbrangLogisticaPage.InserePrioridade(campoprioridade,linhaplanilha.Prioridade);
+//
+//            AbrangLogisticaPage.InsereCiclo(campocicloinicial ,linhaplanilha.CicloInicio);
 
             AbrangLogisticaPage.acao("btnAddSessionItem");
 
@@ -212,7 +212,7 @@ public class AbrangenciaLogistica extends BaseTest {
             Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
+//            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
         }
 
         public void ExcluiRascunhoLog()
@@ -223,11 +223,11 @@ public class AbrangenciaLogistica extends BaseTest {
 
             String acao = "excluir";
 
-            var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
+//            var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
-            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste , acao );
+//            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste , acao );
         }
 
   

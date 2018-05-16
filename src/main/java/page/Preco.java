@@ -5,7 +5,9 @@
  */
 package page;
 
-import core.BaseTest;
+import core.*;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +18,7 @@ import java.util.logging.Logger;
 public class Preco extends BaseTest{
     
     public PrecoPage PrecoPage = new PrecoPage();
-    
+    public MsgConfig msgconfig = new MsgConfig();
     String telapreco = "//*[@id=\"sidebar\"]/ul/li[6]/a/span";
     String botaoincluir = "btnIncluir";
     String botaoaprovar = "btnAprovar";
@@ -38,25 +40,25 @@ public class Preco extends BaseTest{
     String redutor = "redutor";
     String pontos = "pontos";
     String campomotivo = "codigoMotivo";
-        
+    
+    public static void main(){};
+    
         public void InserirPreco()
         {
             String acao = "inserir";
 
             String linha = "Aprovado";
 
-            String teste = "Inserir Abrangência Comercial";
-
-            var Validacao = ConfigurationManager.AppSettings["MsgInclui"];
-
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
-
+            String teste = "Inserir Abrangência Comercial"; 
+  
+            String Validacao = msgconfig.Msg("MsgInclui");
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+     
             PrecoPage.AguardaXPath(telapreco);
 
             PrecoPage.MenuPreco(telapreco);
 
-            PrecoPage.InserirCodVenda(campocodvenda ,linhaplanilha.CodVendaProduto);
+//            PrecoPage.InserirCodVenda(campocodvenda ,linhaplanilha.CodVendaProduto);
 
 
             PrecoPage.BuscarAbrangencia(consultar);
@@ -87,11 +89,11 @@ public class Preco extends BaseTest{
             Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            PrecoPage.InsereCiclo(cicloinicial , linhaplanilha.CicloInicio);
-
-            PrecoPage.InserePreco(preco ,linhaplanilha.Preco);
-
-            PrecoPage.InsereRedutor(redutor, linhaplanilha.Redutor);
+//            PrecoPage.InsereCiclo(cicloinicial , linhaplanilha.CicloInicio);
+//
+//            PrecoPage.InserePreco(preco ,linhaplanilha.Preco);
+//
+//            PrecoPage.InsereRedutor(redutor, linhaplanilha.Redutor);
 
             PrecoPage.acao(pontos);
 
@@ -101,7 +103,7 @@ public class Preco extends BaseTest{
             Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            PrecoPage.SelecionaMotivo(campomotivo , linhaplanilha.Motivo);
+//            PrecoPage.SelecionaMotivo(campomotivo , linhaplanilha.Motivo);
 
             PrecoPage.Incluir("btnIncluirItem");
 
@@ -119,7 +121,7 @@ public class Preco extends BaseTest{
             Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
+//            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
 
         }
 
@@ -131,11 +133,11 @@ public class Preco extends BaseTest{
 
             String teste = "Aprovar Abrangência Comercial";
 
-            var Validacao = ConfigurationManager.AppSettings["MsgAprovaPreco"];
+//            var Validacao = ConfigurationManager.AppSettings["MsgAprovaPreco"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
-            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste, acao);
+//            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste, acao);
 
 
         }
@@ -149,12 +151,12 @@ public class Preco extends BaseTest{
 
             String teste = "Cancelar Abrangência Comercial";
 
-            String Validacao = ConfigurationManager.AppSettings["MsgCancelaPreco"];
+//            String Validacao = ConfigurationManager.AppSettings["MsgCancelaPreco"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-
-            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste, acao);
+//            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste, acao);
         }
 
         public void SalvarPreco()
@@ -165,15 +167,15 @@ public class Preco extends BaseTest{
 
             String teste = "Alterar ciclo final e salvar Abrangência Comercial";
 
-            var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
-
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+//            var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
             PrecoPage.MenuPreco(telapreco);
 
             PrecoPage.AguardaXPath(telapreco);
 
-            PrecoPage.InserirCodVenda("txtCodVenda", linhaplanilha.CodVendaProduto);
+//            PrecoPage.InserirCodVenda("txtCodVenda", linhaplanilha.CodVendaProduto);
 
             PrecoPage.AguardaXPath(consultar);
 
@@ -221,7 +223,7 @@ public class Preco extends BaseTest{
 
             PrecoPage.AguardaId("cicloTermino");
 
-            PrecoPage.InsereCiclo("cicloTermino", linhaplanilha.CicloFim);
+//            PrecoPage.InsereCiclo("cicloTermino", linhaplanilha.CicloFim);
 
             PrecoPage.AguardaId("btnSalvar");
 
@@ -233,7 +235,7 @@ public class Preco extends BaseTest{
             Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
+//            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
         }
 
         public void ExcluiPreco()
@@ -244,11 +246,11 @@ public class Preco extends BaseTest{
 
             String teste = "Excluir Rascunho Abrangência Comercial ";
 
-            var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
+//            var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
+//
+//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-            var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
-            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste, acao);
+//            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste, acao);
         }
 
 

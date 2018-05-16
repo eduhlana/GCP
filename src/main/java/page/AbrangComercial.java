@@ -1,10 +1,13 @@
 
 package page;
 
-import ArquivoDePropriedades;
 import core.BaseTest;
 import core.BasePage;
+import data.ExcellAcess;
+import java.util.HashMap;
 import org.junit.Test;
+import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author eduardo.lana
@@ -13,7 +16,6 @@ public class AbrangComercial extends BaseTest  {
     
     public AbrangComercialPage AbrangComercialPage = new AbrangComercialPage();
     public BasePage basepage = new BasePage();
-    public ArquivoDePropriedades prop = new ArquivoDePropriedades();
     String telaabrangcomercial = "//*[@id=\"sidebar\"]/ul/li[4]/a/span";
     String botaoincluir = "btnIncluir";
     String botaoaprovar = "btnAprovar";
@@ -27,8 +29,11 @@ public class AbrangComercial extends BaseTest  {
     String mensagemresultado = "/ html / body / div[6] / div[2]";
     String abrangencia = "//*[@id=\"arvoreEstrutura\"]/ul/li/span/span[2]";
     String Aprovado = "1";
-
-
+    public List<HashMap<String,String>> datamap;
+    public AbrangComercial(){
+        
+        datamap = ExcellAcess.data(System.getProperty("user.dir")+"E:\\GCP\\src\\main\\java\\data\\users.xlsx","Comercial");
+    }
     @Test
     public void AprovarRascunhoAbrang()
       {
@@ -38,11 +43,11 @@ public class AbrangComercial extends BaseTest  {
 
           String teste = "Aprovar Abrangência Comercial";
 
-          String validacao = ArquivoDePropriedades.getProp()["MsgAprova"];
+          String validacao = " Registros aprovados com sucesso!";
 
-          var linhaplanilha = ExcellAcess.PegaLinha(linha);
+//          var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-          AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste , acao);
+//          AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste , acao);
 
       }
     
@@ -55,12 +60,12 @@ public class AbrangComercial extends BaseTest  {
 
           String teste = "Cancelar Abrangência Comercial";
 
-          String Validacao = ConfigurationManager.AppSettings["MsgCancel"];
+          String Validacao = " Registros cancelados com sucesso!";
+//
+//          var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-          var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-
-          AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste , acao);
+//          AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste , acao);
       }
       @Test
       public void SalvarAbrang() throws InterruptedException
@@ -71,19 +76,19 @@ public class AbrangComercial extends BaseTest  {
 
           String teste = "Alterar ciclo final e salvar Abrangência Comercial";
 
-          var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
-
-          var linhaplanilha = ExcellAcess.PegaLinha(linha);
+          String Validacao = " Registro salvo com sucesso!";
+//
+//          var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
           AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
 
           AbrangComercialPage.AguardaXPath(telaabrangcomercial);
 
-          AbrangComercialPage.InserirCodVenda("txtCodVenda", linhaplanilha.CodVendaProduto);
+//          AbrangComercialPage.InserirCodVenda("txtCodVenda", linhaplanilha.CodVendaProduto);
 
           AbrangComercialPage.SelecionaStatus(Aprovado);
 
-          AbrangComercialPage.SelecionaStatus(linhaplanilha.Status);
+//          AbrangComercialPage.SelecionaStatus(linhaplanilha.Status);
 
           AbrangComercialPage.ConsultarAbrangencia(consultar);
 
@@ -97,7 +102,7 @@ public class AbrangComercial extends BaseTest  {
 
           AbrangComercialPage.AguardaId("cicloTermino");
 
-          AbrangComercialPage.InsereCiclo("cicloTermino", linhaplanilha.CicloFim);
+//          AbrangComercialPage.InsereCiclo("cicloTermino", linhaplanilha.CicloFim);
 
           Thread.sleep(1000);
 
@@ -105,7 +110,7 @@ public class AbrangComercial extends BaseTest  {
 
           AbrangComercialPage.AguardaXPath(mensagemresultado);
 
-          AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
+//          AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
       }
     @Test
     public void ExcluiRascunhoAbrang()
@@ -116,11 +121,11 @@ public class AbrangComercial extends BaseTest  {
 
         String teste = "Excluir Rascunho Abrangência Comercial ";
 
-        var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
+        String Validacao = " Registros excluídos com sucesso!";
+//
+//        var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-        var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
-        AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste , acao);
+//        AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste , acao);
     }
 
 
