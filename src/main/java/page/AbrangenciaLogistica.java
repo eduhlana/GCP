@@ -6,8 +6,12 @@
 package page;
 
 import core.*;
+import data.PegaLinhaExcel;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.junit.Test;
 
 /**
  *
@@ -15,8 +19,11 @@ import java.util.logging.Logger;
  */
 public class AbrangenciaLogistica extends BaseTest {
     private AbrangenciaLogisticaPage AbrangLogisticaPage = new AbrangenciaLogisticaPage();
+    private MsgConfig config = new MsgConfig();
     private BasePage basepage = new BasePage();
-    String telaabranglogistica = "//*[@id=\"sidebar\"]/ul/li[5]/a/span";
+    private PegaLinhaExcel linha = new PegaLinhaExcel();
+    
+    String telaabranglogistica = "//*[@id=\"sidebar\"]/ul/li[5]/a";
     String botaoincluir = "btnIncluir";
     String botaoaprovar = "btnAprovar";
     String botaocancelar = "btnCancelar";
@@ -27,28 +34,39 @@ public class AbrangenciaLogistica extends BaseTest {
     String telaerro = "/ html / body / div[8]";
     String mensagemresultado = "/ html / body / div[6] / div[2]";
     String abrangencia = "//*[@id=\"arvoreEstrutura\"]/ul/li/span/span[2]";
-    String gridcomercial = "//*[@id=\"tbAbrangencia\" and @style=\"201819\")]";
-    String gridlogistica = "//*[@id=\"tbProdutoAbrangencia\"]/tbody/tr/td[4]/input";
+    String gridcomercial = "//*[@id=\"tbAbrangencia\"]/tbody/tr[1]/td[2]";
+    String gridlogistica = "//*[@id=\"tbProdutoAbrangencia\"]/div[1]/div[2]/div[2]/table/tbody/tr/td[4]/input";
     String material = "//*[@id=\"codigoProduto\"]";
     String Aprovado = "1";
     String campomaterial = "codigoProduto";
     String campoprioridade = "nmPrioridade";
     String campocicloinicial = "nmCicloInicio";
     String campociclofinal = "nmCicloTermino";
-    String lupaalterar = "//*[@id=\"tbProdutoAbrangencia\"]/tbody/tr[1]/td[3]/a";
+    String lupaalterar = "//*[@id=\"tbProdutoAbrangencia\"]/div[1]/div[2]/div[2]/table/tbody/tr/td[3]/a";
     String linhamaterial = "//*[@id=\"tbProdutoAbrangenciaItem\"]/tbody/tr[1]/td[8]/input"; 
+    String statuslog = "//*[@id=\"pesquisarForm\"]/div[5]/div[1]/div[1]/div[2]/div[1]/label/input";
+    String cicloinicomercialincl = "//*[@id=\"incluirForm\"]/div[2]/div[4]/div[1]/div/div[3]/div/label[2]";
+    String ciclofimcomercialincl = "//*[@id=\"incluirForm\"]/div[2]/div[4]/div[1]/div/div[4]/div/label[2]";
+    String cicloinicomercialialt = "//*[@id=\"alterarForm\"]/div[2]/div[4]/div[1]/div/div[3]/div/label[2]";
+    String ciclofimcomercialialt = "//*[@id=\"alterarForm\"]/div[2]/div[4]/div[1]/div/div[4]/div/label[2]";
+    String botaoAlterar = "//*[@id=\"btnAlterar\"]";
     
-    
+    String[] linhaplanilha = new String[10];
+	
+ public static void main(String[] args){};
+ 
+ 
  public void InserirAbrangLog()
         {
 
-            String linha = "Aprovado";
+	 
+            String teste = "Aprovado";
 
-            String teste = "Inserir Abrangência Logística";
+            String metodo = "Inserir Abrangência Logística";
 
-//            var Validacao = ConfigurationManager.AppSettings["MsgInclui"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgInclui");
+            
+            linhaplanilha = linha.Pegalinha(teste);
 
             AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
 
@@ -56,33 +74,40 @@ public class AbrangenciaLogistica extends BaseTest {
 
             AbrangLogisticaPage.Aguardaid(campocodvenda);
 
-//            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha.CodVendaProduto);
+            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha[1]);
+            
+            AbrangLogisticaPage.Aguardaid("statusTodos");
+            
+            AbrangLogisticaPage.StatusTodos("statusTodos");
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            AbrangLogisticaPage.Aguardaxpath(gridcomercial);
 
             AbrangLogisticaPage.SelecionaAbrangencia(gridcomercial);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            AbrangLogisticaPage.Aguardaxpath(lupaalterar);
 
             AbrangLogisticaPage.Incluir(botaoincluir);
 
             AbrangLogisticaPage.Aguardaid("incluirForm");
+            
+            String material = linhaplanilha[5].replace(".","");
+            		
+            AbrangLogisticaPage.SelecionaMaterial(campomaterial , material);
 
-//            AbrangLogisticaPage.SelecionaMaterial(campomaterial , linhaplanilha.Material);
-//
-//            AbrangLogisticaPage.InserePrioridade(campoprioridade, linhaplanilha.Prioridade);
-//
-//            AbrangLogisticaPage.InsereCiclo(campocicloinicial , linhaplanilha.CicloInicio);
+            AbrangLogisticaPage.InserePrioridade(campoprioridade, linhaplanilha[6]);
+            
+            String cicloini = AbrangLogisticaPage.ObtercicloComercial(cicloinicomercialincl);
+
+            AbrangLogisticaPage.InsereCiclo(campocicloinicial , cicloini);
+            
+            String ciclofim = AbrangLogisticaPage.ObtercicloComercial(ciclofimcomercialincl);
+            
+            if (ciclofim!="") {
+            
+            	AbrangLogisticaPage.InsereCiclo(campociclofinal , ciclofim);
+            }
 
             AbrangLogisticaPage.Incluir("btnAddSessionItem");
 
@@ -94,31 +119,32 @@ public class AbrangenciaLogistica extends BaseTest {
 
             AbrangLogisticaPage.AlterarOuSalvar("btnSalvar");
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-//            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado,  Validacao, teste);
+            AbrangLogisticaPage.Aguardaxpath(mensagemresultado);
+            
+            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado,  validacao, metodo);
          
         }
      
+ 
+ 
+ 
+ 
+ 
         public void AprovarRascunhoAbrangLog()
         {
 
-            String linha = "Rascunho";
+            String teste = "Rascunho";
 
             String acao = "aprovar";
 
-            String teste = "Aprovar Abrangência Logística";
+            String metodo = "Aprovar Abrangência Logística";
 
-//            var Validacao = ConfigurationManager.AppSettings["MsgAprovaLog"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgAprovaLog");
+
+            linhaplanilha = linha.Pegalinha(teste);
 
       
-//            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste , acao );
+           Acao(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo , acao );
 
 
         }
@@ -126,160 +152,171 @@ public class AbrangenciaLogistica extends BaseTest {
 
         public void CancelarAbrangLog()
         {
-            String linha = "Aprovado";
+            String teste = "Aprovado";
 
-            String teste = "Cancelar Abrangência Logística";
+            String metodo = "Cancelar Abrangência Logística";
 
             String acao = "cancelar";
 
-//            String Validacao = ConfigurationManager.AppSettings["MsgCancelLog"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgCancelLog");
+
+            linhaplanilha = linha.Pegalinha(teste);
 
 
-//            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste , acao );
+            Acao(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo , acao );
         }
+
 
         public void SalvarAbrangLog()
         {
-            String linha = "Encerrado";
+            String teste = "Encerrado";
 
-            String teste = "Alterar e salvar Abrangência Logística";
+            String metodo = "Alterar e salvar Abrangência Logística";
 
-   
-//            var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
+            String validacao = config.Msg("MsgInclui");
+            
+            linhaplanilha = linha.Pegalinha(teste);
+            
+            AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
             
             AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
 
-            AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
+            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha[1]);
+         
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-//            AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha.CodVendaProduto);
+            
+            AbrangLogisticaPage.InsereCiclo("cicloInicioPesquisa" , linhaplanilha[3]);
+            
+            AbrangLogisticaPage.StatusTodos("statusTodos");
+            
+            
+            AbrangLogisticaPage.Aguardaid(consultar);
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            AbrangLogisticaPage.Aguardaxpath(gridcomercial);
 
             AbrangLogisticaPage.SelecionaAbrangencia(gridcomercial);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-            AbrangLogisticaPage.SelecionaStatus(Aprovado);
-
+            
             AbrangLogisticaPage.Aguardaxpath(lupaalterar);
 
             AbrangLogisticaPage.SelecionaAbrangencia(lupaalterar);
 
-            AbrangLogisticaPage.Aguardaid("btnAlterar");
-
-            AbrangLogisticaPage.acao("btnAlterar");
+            AbrangLogisticaPage.Aguardaxpath(botaoAlterar);
+            
+            AbrangLogisticaPage.ConfirmaCancela(botaoAlterar);
+            
 
             AbrangLogisticaPage.Aguardaid(campociclofinal);
+            
+            AbrangLogisticaPage.Aguardaxpath(linhamaterial);
 
             AbrangLogisticaPage.SelecionaMaterial(linhamaterial);
 
             AbrangLogisticaPage.acao("btnRemoveSessionItems");
+            
+            String material = linhaplanilha[5].replace(".","");
+            
+            AbrangLogisticaPage.Aguardaid(campomaterial);
+            
+            AbrangLogisticaPage.SelecionaMaterial(campomaterial, material);
 
-//            AbrangLogisticaPage.SelecionaMaterial(campomaterial, linhaplanilha.Material);
-//
-//            AbrangLogisticaPage.InserePrioridade(campoprioridade,linhaplanilha.Prioridade);
-//
-//            AbrangLogisticaPage.InsereCiclo(campocicloinicial ,linhaplanilha.CicloInicio);
+            AbrangLogisticaPage.InserePrioridade(campoprioridade,linhaplanilha[6]);
+            
+            String cicloini = AbrangLogisticaPage.ObtercicloComercial(cicloinicomercialialt);
+
+            AbrangLogisticaPage.InsereCiclo(campocicloinicial ,cicloini);
+            
+            
+            String ciclofim = AbrangLogisticaPage.ObtercicloComercial(ciclofimcomercialialt);
+            
+            if (ciclofim!="") {
+                
+            	AbrangLogisticaPage.InsereCiclo(campociclofinal , ciclofim);
+            }     
 
             AbrangLogisticaPage.acao("btnAddSessionItem");
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             AbrangLogisticaPage.acao("btnSalvar");
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
+            AbrangLogisticaPage.Aguardaxpath(mensagemresultado);
+
+            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
         }
 
-//            AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
-        }
+ 
 
         public void ExcluiRascunhoLog()
         {
-            String linha = "Rascunho";
+            String teste = "Rascunho";
 
-            String teste = "Excluir Rascunho Abrangência Logistica ";
+            String metodo = "Excluir Rascunho Abrangência Logistica ";
 
             String acao = "excluir";
 
-//            var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgExclui");
 
-//            Acao(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste , acao );
+            linhaplanilha = linha.Pegalinha(teste);
+
+            Acao(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, metodo , acao );
         }
 
-  
+ 
         public void Acao(String status, String codvenda, String botao, String Validacao, String teste , String acao )
         {
 
-            AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
+        	 AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
 
-            AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
+             AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
+
+             AbrangLogisticaPage.Aguardaid(campocodvenda);
+
 
             AbrangLogisticaPage.InserirCodVenda(campocodvenda, codvenda);
+            
+            if (Aprovado != status) {
+            	AbrangLogisticaPage.SelecionaStatusLog(Aprovado);
+            	 try {
+     				Thread.sleep(800);
+     			} catch (InterruptedException e) {
+     				// TODO Auto-generated catch block
+     				e.printStackTrace();
+     			}
+            	AbrangLogisticaPage.SelecionaStatusLog(status);
+    		}
+            
+         
+            AbrangLogisticaPage.Aguardaid(consultar);
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
+            try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            AbrangLogisticaPage.Aguardaxpath(gridcomercial);
 
             AbrangLogisticaPage.SelecionaAbrangencia(gridcomercial);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-            if (status != Aprovado)
-            {
-                AbrangLogisticaPage.SelecionaStatus(Aprovado);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                AbrangLogisticaPage.SelecionaStatus(status);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            
+            
+            AbrangLogisticaPage.Aguardaxpath(gridlogistica);
             
             AbrangLogisticaPage.SelecionaAbrangenciaLog(gridlogistica , acao , teste);
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+            
             AbrangLogisticaPage.acao(botao);
 
             AbrangLogisticaPage.Aguardaxpath(confirmar);

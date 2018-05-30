@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany</groupId>
     <artifactId>RegressaoGCPJava</artifactId>
@@ -27,8 +27,8 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <type>jar</type>
+            <version>4.12</version>
+			<type>jar</type>
         </dependency>
          <dependency>
             <groupId>org.apache.poi</groupId>
@@ -37,22 +37,18 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.jexcelapi</groupId>
-            <artifactId>jxl</artifactId>
-            <version>2.6.12</version>
-        </dependency>
-         <dependency>
-            <groupId>net.sf.ucanaccess</groupId>
-            <artifactId>ucanaccess</artifactId>
-            <version>4.0.4</version>
-            <type>jar</type>
-        </dependency>
+    		<groupId>org.apache.xmlbeans</groupId>
+    		<artifactId>xmlbeans</artifactId>
+   			<version>2.3.0</version>
+			<type>jar</type>
+		</dependency>
         <dependency>
-        <groupId>org.easetech</groupId>
-        <artifactId>easytest-core</artifactId>
-        <version>1.4.0</version>
-</dependency>
-    </dependencies>
+    		<groupId>commons-lang</groupId>
+    		<artifactId>commons-lang</artifactId>
+    		<version>2.6</version>
+    		<type>jar</type>
+		</dependency>
+	</dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

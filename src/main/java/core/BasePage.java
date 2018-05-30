@@ -12,107 +12,112 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 /**
  *
  * @author eduardo.lana
  */
 public class BasePage {
-    
-     protected void acao(By Element)
-        {
-            DriverFactory.GetDriver().findElement(Element).click();
-        }
-        protected void SelecionaGridComercial(By Element )
-        { 
-            try
-            {
-                DriverFactory.GetDriver().findElement(Element).click();
-            }
-            catch (NoSuchElementException a)
-            {
-                System.out.println("Nao existe abrangência comercial cadastrada para esse código de venda ");
-                throw a;
-            }
-        }
-        protected void SelecionaGrid(By Element ,String acao , String teste)
-        {
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            Date today = Calendar.getInstance().getTime();
-            String logDate = df.format(today);
-            try
-            {
-                DriverFactory.GetDriver().findElement(Element).click();
-            }
-            catch (NoSuchElementException a)
-            {
 
-                System.out.println("Nao existe registro para  " + acao);
-                throw a;
-            }
-        }
-        protected void Escrever(By Element, String Text )
-        {
-            
-            DriverFactory.GetDriver().findElement(Element).sendKeys(Text);
-        }
-        protected void SelectValue(By Element, String Text)
-        {
+	protected void acao(By Element) {
+		DriverFactory.GetDriver().findElement(Element).click();
+	}
 
-            new Select(DriverFactory.GetDriver().findElement(Element)).selectByValue(Text);
-        }
+	protected void SelecionaGridComercial(By Element) {
+		try {
+			DriverFactory.GetDriver().findElement(Element).click();
+		} catch (NoSuchElementException a) {
+			System.out.println("Nao existe abrangência comercial cadastrada para esse código de venda ");
+			throw a;
+		}
+	}
 
-        protected void Status(By Element)
-        {
+	protected void SelecionaGrid(By Element, String acao, String teste) {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();
+		String logDate = df.format(today);
+		try {
+			DriverFactory.GetDriver().findElement(Element).click();
+		} catch (NoSuchElementException a) {
 
-            DriverFactory.GetDriver().findElement(Element).click();
-            
-           
-        }
-        protected String ObterTexto(By Element)
-        {
-            return DriverFactory.GetDriver().findElement(Element).getText();
-        }
-        protected void ValidaMensagemPopup(By Element , By Element1, String Texto1 , String teste) throws InterruptedException
-        {
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            Date today = Calendar.getInstance().getTime();
-            String logDate = df.format(today);
-            String result;
-            try
-            {
-                
-                String mensagem = DriverFactory.GetDriver().findElement(Element).getText();
+			System.out.println("Nao existe registro para  " + acao);
+			throw a;
+		}
+	}
 
-                if (mensagem == "")
-                {
-                    DriverFactory.GetDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                     mensagem = DriverFactory.GetDriver().findElement(Element1).getText();
-                    result = logDate + " - " + teste + ": " + mensagem;
-                    System.out.println(result);
-                    assertEquals(mensagem,Texto1);
-                }
-                 result = logDate + " - " + teste + ": " + mensagem;
-               
-               
-                
-            }catch(NoSuchElementException a)
-            {
-                Thread.sleep(1000);
-                String mensagem = DriverFactory.GetDriver().findElement(Element1).getText();
-                 result = logDate + " - " + teste + ": " + mensagem;
-                assertEquals(mensagem, Texto1);
-            }
-           
-        }
-        protected void EsperaCarregamento(String Element)
-        {
-           
-            WebDriverWait wait = new WebDriverWait(DriverFactory.GetDriver(),10);
-            wait.until(ExpectedConditions.elementToBeClickable(By.id(Element)));
-    
-        }
+	protected void Escrever(By Element, String Text) {
 
-    
-    }
-    
+		DriverFactory.GetDriver().findElement(Element).sendKeys(Text);
+	}
 
+	protected void SelectValue(By Element, String Text) {
+
+		new Select(DriverFactory.GetDriver().findElement(Element)).selectByValue(Text);
+	}
+
+	protected void Status(By Element) {
+
+		DriverFactory.GetDriver().findElement(Element).click();
+
+	}
+
+	protected String ObterTexto(By Element) {
+		return DriverFactory.GetDriver().findElement(Element).getText();
+	}
+
+	protected void ValidaMensagemPopup(By Element, By Element1, String Texto1, String teste) {
+
+		Date logDate = new Date();
+
+		String result;
+		try {
+
+			String mensagem = DriverFactory.GetDriver().findElement(Element).getText();
+			result = logDate + " - " + teste + ": " + mensagem;
+			assertEquals(mensagem, Texto1);
+
+		} catch (NoSuchElementException a) {
+			DriverFactory.GetDriver().manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
+			String mensagem = DriverFactory.GetDriver().findElement(Element1).getText();
+			result = logDate + " - " + teste + ": " + mensagem;
+			assertEquals(mensagem, Texto1);
+		}
+
+	}
+
+	protected void EsperaCarregamento(By Element) {
+
+		WebDriverWait wait = new WebDriverWait(DriverFactory.GetDriver(), 80);
+		wait.until(ExpectedConditions.visibilityOfElementLocated((Element)));
+ 
+	}
+	protected String ObtemCiclo(By Element) {
+		try {
+			return DriverFactory.GetDriver().findElement(Element).getText();
+		}catch(Exception e) {
+				return "";
+			}
+		
+	}
+	
+	protected String ObtemCicloComercial(By Element) {
+		try {
+			String valor = DriverFactory.GetDriver().findElement(Element).getAttribute("value");
+			return valor;
+		}catch(Exception e) {
+				return "";
+			}
+		
+	}
+	protected String resultado(By Element) {
+		try {
+			String retorno = DriverFactory.GetDriver().findElement(Element).getText();
+			return DriverFactory.GetDriver().findElement(Element).getText();
+			
+		}catch(Exception e) {
+				return "";
+			}
+		
+	}
+
+}

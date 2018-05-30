@@ -6,10 +6,18 @@
 package page;
 
 import core.*;
+import data.PegaLinhaExcel;
+
+import org.junit.*;
+
+import static org.junit.Assert.assertArrayEquals;
+
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.junit.Test;
 
 /**
  *
@@ -18,7 +26,10 @@ import java.util.logging.Logger;
 public class Preco extends BaseTest{
     
     public PrecoPage PrecoPage = new PrecoPage();
-    public MsgConfig msgconfig = new MsgConfig();
+    public MsgConfig config = new MsgConfig();
+    public BasePage basepage = new BasePage();
+    public PegaLinhaExcel linha = new PegaLinhaExcel();
+    
     String telapreco = "//*[@id=\"sidebar\"]/ul/li[6]/a/span";
     String botaoincluir = "btnIncluir";
     String botaoaprovar = "btnAprovar";
@@ -26,7 +37,8 @@ public class Preco extends BaseTest{
     String campocodvenda = "txtCodVenda";
     String botaoexcluir = "btnExcluir";
     String consultar = "//*[@id=\"btnPesquisar\"]";
-    String linhagrid = "//*[@id=\"tbPreco\"]/tbody/tr/td[8]/input";
+    String linhagrid = "//*[@id=\"tbPreco\"]/div[1]/div[2]/div[2]/table/tbody/tr[1]/td[8]/input";
+    String precogrig = "//*[@id=\"tbPrecoItem\"]/tbody/tr/td[10]/input";
     String confirmar = "/ html / body / div[6] / div[3] / div / button[1]";
     String telaerro = "/ html / body / div[8] ";
     String mensagemresultado = "/ html / body / div[6] / div[2]";
@@ -40,46 +52,47 @@ public class Preco extends BaseTest{
     String redutor = "redutor";
     String pontos = "pontos";
     String campomotivo = "codigoMotivo";
+    String cicloiniciocomercial = "//*[@id=\"incluirForm\"]/div[2]/div[3]/div[2]/div/label[2]";
+    String ciclofimcomercial = "//*[@id=\"incluirForm\"]/div[2]/div[3]/div[4]/div/label[2]";
+    String okfinal = "/html/body/div[6]/div[3]/div/button";
     
-    public static void main(){};
+    String[] linhaplanilha = new String[10];
     
-        public void InserirPreco()
+    public static void main(String[] args){};
+    
+        
+    @Test
+    public void InserirPreco()
         {
             String acao = "inserir";
 
-            String linha = "Aprovado";
+            String teste = "Aprovado";
 
-            String teste = "Inserir Abrangência Comercial"; 
+            String metodo = "Inserir Abrangência Comercial"; 
   
-            String Validacao = msgconfig.Msg("MsgInclui");
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgInclui");
+            
+            linhaplanilha = linha.Pegalinha(teste);
      
             PrecoPage.AguardaXPath(telapreco);
 
             PrecoPage.MenuPreco(telapreco);
 
-//            PrecoPage.InserirCodVenda(campocodvenda ,linhaplanilha.CodVendaProduto);
-
+            PrecoPage.InserirCodVenda(campocodvenda ,linhaplanilha[1]);
+            
+            PrecoPage.StatusTodos("statusTodos");
 
             PrecoPage.BuscarAbrangencia(consultar);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+            
+            PrecoPage.AguardaXPath(gridcomercial);
+       
             PrecoPage.SelecionaAbrangenciaVigencia(gridcomercial);
 
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            PrecoPage.AguardaXPath(linhagrid);
 
             PrecoPage.Incluir(botaoincluir);
-
-            PrecoPage.AguardaXPath(abrangencia);
+           
+            PrecoPage.AguardaId(cicloinicial);
 
             PrecoPage.SelecionaAbrangenciaVigencia(abrangencia);
 
@@ -88,12 +101,18 @@ public class Preco extends BaseTest{
         } catch (InterruptedException ex) {
             Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
         }
+        	
+        	String cicloini = PrecoPage.PegaCiclo(cicloiniciocomercial);
+        
+            PrecoPage.InsereCiclo(cicloinicial , cicloini);
+            
+            String ciclofim = PrecoPage.PegaCiclo(ciclofimcomercial);
+            
+            PrecoPage.InsereCiclo(ciclofinal , ciclofim);
 
-//            PrecoPage.InsereCiclo(cicloinicial , linhaplanilha.CicloInicio);
-//
-//            PrecoPage.InserePreco(preco ,linhaplanilha.Preco);
-//
-//            PrecoPage.InsereRedutor(redutor, linhaplanilha.Redutor);
+            PrecoPage.InserePreco(preco ,linhaplanilha[7]);
+
+            PrecoPage.InsereRedutor(redutor, linhaplanilha[8]);
 
             PrecoPage.acao(pontos);
 
@@ -103,79 +122,86 @@ public class Preco extends BaseTest{
             Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-//            PrecoPage.SelecionaMotivo(campomotivo , linhaplanilha.Motivo);
+            PrecoPage.SelecionaMotivo(campomotivo , linhaplanilha[9]);
 
             PrecoPage.Incluir("btnIncluirItem");
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            PrecoPage.AguardaXPath(precogrig);
+            
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
             PrecoPage.AlterarOuSalvar("btnSalvar");
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-//            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
+            PrecoPage.AguardaXPath(mensagemresultado);
+            
+            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
 
         }
-
-        public void AprovarPreco()
+        
+    
+ 
+    @Test  
+    public void AprovarPreco()
         {
             String acao = "aprovar";
 
-            String linha = "Rascunho";
+            String teste = "Rascunho";
 
-            String teste = "Aprovar Abrangência Comercial";
+            String metodo = "Aprovar Abrangência Comercial";
 
-//            var Validacao = ConfigurationManager.AppSettings["MsgAprovaPreco"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-//            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste, acao);
+            String validacao = config.Msg("MsgAprovaPreco");
+
+            linhaplanilha = linha.Pegalinha(teste);
+
+            AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo, acao);
 
 
         }
 
-    
-        public void CancelarPreco()
+ 
+    @Test   
+    public void CancelarPreco()
         {
             String acao = "cancelar";
 
-            String linha = "Aprovado";
+            String teste = "Aprovado";
 
-            String teste = "Cancelar Abrangência Comercial";
+            String metodo = "Cancelar Abrangência Comercial";
 
-//            String Validacao = ConfigurationManager.AppSettings["MsgCancelaPreco"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgCancelaPreco");
+
+            linhaplanilha = linha.Pegalinha(teste);
 
 
-//            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste, acao);
+            AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo, acao);
         }
 
-        public void SalvarPreco()
+    @Test
+    public void SalvarPreco()
         {
             String acao = "salvar";
 
-            String linha = "Rascunho";
+            String teste = "Rascunho";
 
-            String teste = "Alterar ciclo final e salvar Abrangência Comercial";
+            String metodo = "Alterar ciclo final e salvar Abrangência Comercial";
 
-//            var Validacao = ConfigurationManager.AppSettings["MsgAltera"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
+            String validacao = config.Msg("MsgInclui");
+
+            linhaplanilha = linha.Pegalinha(teste);
 
             PrecoPage.MenuPreco(telapreco);
 
             PrecoPage.AguardaXPath(telapreco);
 
-//            PrecoPage.InserirCodVenda("txtCodVenda", linhaplanilha.CodVendaProduto);
+            PrecoPage.InserirCodVenda("txtCodVenda", linhaplanilha[1]);
+            
+            PrecoPage.StatusTodos("StatusTodos");
 
             PrecoPage.AguardaXPath(consultar);
 
@@ -184,36 +210,8 @@ public class Preco extends BaseTest{
             PrecoPage.AguardaXPath(gridcomercial);
 
             PrecoPage.SelecionaAbrangenciaVigencia(gridcomercial);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-            PrecoPage.SelecionaStatus(Aprovado);
-
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-            PrecoPage.SelecionaStatus("6");
-
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-            PrecoPage.SelecionaStatus("7");
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            PrecoPage.AguardaXPath(lupaalterar);
 
             PrecoPage.SelecionaAbrangencia(lupaalterar, acao, teste);
 
@@ -223,67 +221,46 @@ public class Preco extends BaseTest{
 
             PrecoPage.AguardaId("cicloTermino");
 
-//            PrecoPage.InsereCiclo("cicloTermino", linhaplanilha.CicloFim);
-
             PrecoPage.AguardaId("btnSalvar");
 
             PrecoPage.AlterarOuSalvar("btnSalvar");
+            
+            PrecoPage.AguardaXPath(mensagemresultado);
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
+            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
         }
-
-//            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
-        }
-
+    
+    
+    
+    @Test
         public void ExcluiPreco()
         {
             String acao = "excluir";
 
-            String linha = "Rascunho";
+            String teste = "Rascunho";
 
-            String teste = "Excluir Rascunho Abrangência Comercial ";
+            String metodo = "Excluir Rascunho Abrangência Comercial ";
 
-//            var Validacao = ConfigurationManager.AppSettings["MsgExclui"];
-//
-//            var linhaplanilha = ExcellAcess.PegaLinha(linha);
 
-//            AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste, acao);
+            String validacao = config.Msg("MsgExclui");
+
+            linhaplanilha = linha.Pegalinha(teste);
+
+            AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, metodo, acao);
         }
 
 
-        public void AprovaCancelaouExclui(String status, String codvenda, String botao, String texto, String teste, String acao)
+        public void AprovaCancelaouExclui(String status, String codvenda, String botao, String texto, String metodo, String acao)
         {
+        
+        	String aguarda = " Este Preço já encontra-se em Processamento, por favor aguarde!";
 
             PrecoPage.AguardaXPath(telapreco);
 
             PrecoPage.MenuPreco(telapreco);
 
             PrecoPage.InserirCodVenda(campocodvenda, codvenda);
-
-            PrecoPage.AguardaXPath(consultar);
-
-            PrecoPage.BuscarAbrangencia(consultar);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-            PrecoPage.AguardaXPath(gridcomercial);
-
-            PrecoPage.SelecionaAbrangenciaVigencia(gridcomercial);
-
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+            
             if (Aprovado != status)
             {
                 PrecoPage.SelecionaStatus(Aprovado);
@@ -295,28 +272,50 @@ public class Preco extends BaseTest{
                 PrecoPage.SelecionaStatus(status);
             }
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            PrecoPage.AguardaXPath(consultar);
+            
+            PrecoPage.BuscarAbrangencia(consultar);
 
-            PrecoPage.SelecionaAbrangencia(linhagrid, acao, teste);
+
+            PrecoPage.AguardaXPath(gridcomercial);
+            
+
+            PrecoPage.SelecionaAbrangenciaVigencia(gridcomercial);
+
+            PrecoPage.AguardaXPath(lupaalterar);
+            
+            PrecoPage.SelecionaAbrangencia(linhagrid, acao, metodo);
 
             PrecoPage.acao(botao);
 
             PrecoPage.ConfirmaCancela(confirmar);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
+            PrecoPage.AguardaXPath(mensagemresultado);
+            
+            String resultado = PrecoPage.PegaMensagemResultado(mensagemresultado);
+          
+            if (resultado.equals(texto)|| resultado.equals(aguarda)) {
+            	
+            	 try {
+            		 PrecoPage.ConfirmaCancela(okfinal);
+                     Thread.sleep(2000);
+                     PrecoPage.SelecionaStatusPreco("7");
+                     Thread.sleep(4000);
+                     mensagemresultado = "";
+                     mensagemresultado = "//*[@id=\"tbPreco\"]/div[1]/div[2]/div[2]/table/tbody/tr/td";
+                     texto = "";
+                     texto = "Nenhum registro encontrado";
+                 } catch (InterruptedException ex) {
+                     Logger.getLogger(Preco.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+            }
+            
+                      		
+            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, texto, metodo);
+
         }
-
-            PrecoPage.ValidaTextoMensagem(telaerro, mensagemresultado, texto, teste);
-
-        }
-
+        
+       
 
     }
     

@@ -2,161 +2,271 @@
 package page;
 
 import core.BaseTest;
+import core.MsgConfig;
 import core.BasePage;
-import data.ExcellAcess;
-import java.util.HashMap;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-import java.util.List;
-import java.util.ArrayList;
+import org.junit.runners.MethodSorters;
+
+import data.PegaLinhaExcel;;
+
 /**
  *
  * @author eduardo.lana
  */
-public class AbrangComercial extends BaseTest  {
-    
-    public AbrangComercialPage AbrangComercialPage = new AbrangComercialPage();
-    public BasePage basepage = new BasePage();
-    String telaabrangcomercial = "//*[@id=\"sidebar\"]/ul/li[4]/a/span";
-    String botaoincluir = "btnIncluir";
-    String botaoaprovar = "btnAprovar";
-    String botaocancelar = "btnCancelar";
-    String campocodvenda = "txtCodVenda";
-    String botaoexcluir = "btnExcluir";
-    String consultar = "btnPesquisar";
-    String linhagrid = "//*[@id=\"tbAbrangencia\"]/tbody/tr[1]/td[13]/input";
-    String confirmar = "/ html / body / div[6] / div[3] / div / button[1]";
-    String telaerro = "/ html / body / div[8] "; 
-    String mensagemresultado = "/ html / body / div[6] / div[2]";
-    String abrangencia = "//*[@id=\"arvoreEstrutura\"]/ul/li/span/span[2]";
-    String Aprovado = "1";
-    public List<HashMap<String,String>> datamap;
-    public AbrangComercial(){
-        
-        datamap = ExcellAcess.data(System.getProperty("user.dir")+"E:\\GCP\\src\\main\\java\\data\\users.xlsx","Comercial");
-    }
-    @Test
-    public void AprovarRascunhoAbrang()
-      {
-          String acao = "aprovar";
 
-          String linha = "Rascunho";
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class AbrangComercial extends BaseTest {
 
-          String teste = "Aprovar Abrangência Comercial";
+	public AbrangComercialPage AbrangComercialPage = new AbrangComercialPage();
+	public BasePage basepage = new BasePage();
+	public PegaLinhaExcel excel = new PegaLinhaExcel();
+	MsgConfig config = new MsgConfig();
+	
+	String telaabrangcomercial = "//*[@id=\"sidebar\"]/ul/li[4]/a/span";
+	String botaoincluir = "btnIncluir";
+	String botaoaprovar = "btnAprovar";
+	String botaocancelar = "btnCancelar";
+	String campocodvenda = "txtCodVenda";
+	String botaoexcluir = "btnExcluir";
+	String consultar = "btnPesquisar";
+	String linhagrid = "//*[@id=\"tbAbrangencia\"]/tbody/tr[1]/td[13]/input";
+	String confirmar = "/ html / body / div[6] / div[3] / div / button[1]";
+	String telaerro = "/ html / body / div[8] ";
+	String mensagemresultado = "/ html / body / div[6] / div[2]";
+	String abrangencia = "//*[@id=\"arvoreEstrutura\"]/ul/li/span/span[2]";
+	String Aprovado = "1";
+	String cicloiniciocomercial = "//*[@id=\"cicloInicio\"]"; 
+	String ciclofimcomercial =  "//*[@id=\"cicloTermino\"]";
 
-          String validacao = " Registros aprovados com sucesso!";
+	String[] linhaplanilha = new String[10];
+	
+	PegaLinhaExcel linha = new PegaLinhaExcel();
+	
+	 public static void main(String[] args){};
 
-//          var linhaplanilha = ExcellAcess.PegaLinha(linha);
+	 @Test
+	public void InserirAbrang()  {
+		
+		String acao = "inserir";
 
-//          AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoaprovar, Validacao, teste , acao);
+		String teste = "Aprovado";
 
-      }
-    
-    @Test
-    public void CancelarAbrang()
-      {
-          String acao = "cancelar";
+		String metodo = "Inserir Abrangência Comercial";
 
-          String linha = "Aprovado";
+		String validacao = config.Msg("MsgInclui");
 
-          String teste = "Cancelar Abrangência Comercial";
+		linhaplanilha = linha.Pegalinha(teste);
 
-          String Validacao = " Registros cancelados com sucesso!";
-//
-//          var linhaplanilha = ExcellAcess.PegaLinha(linha);
+		AbrangComercialPage.AguardaXPath(telaabrangcomercial);
+
+		AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		AbrangComercialPage.acao(botaoincluir);
+		
+		AbrangComercialPage.AguardaId("codigoVendaProduto");
+
+		AbrangComercialPage.InserirCodVenda("codigoVendaProduto", linhaplanilha[1]);
+		
+		AbrangComercialPage.AguardaXPath(abrangencia);
+		
+		AbrangComercialPage.SelecionarAbrang(abrangencia);
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		AbrangComercialPage.InsereCiclo("cicloInicioIncluir", linhaplanilha[3]);
+
+		AbrangComercialPage.AlterarOuSalvar("btnSalvar");
+
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
+
+	}
+	
+	
+
+	@Test
+	public void AprovarRascunhoAbrang() {
+		
+		String acao = "aprovar";
+
+		String teste = "Rascunho";
+
+		String metodo = "Aprovar Abrangência Comercial";
+
+		String validacao = config.Msg("MsgAprova");
+
+		linhaplanilha = linha.Pegalinha(teste);
+
+		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo, acao);
+
+	}
+
+	@Test
+	public void CancelarAbrang() {
+		String acao = "cancelar";
+
+		String teste = "Aprovado";
+
+		String metodo = "Cancelar Abrangência Comercial";
+
+		String validacao = config.Msg("MsgCancel");
+
+		linhaplanilha = linha.Pegalinha(teste);
+
+		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo, acao);
+	}
+
+	@Test
+	public void SalvarAbrang()  {
+		
+		String acao = "salvar";
+
+		String teste = "Rascunho";
+
+		String metodo = "Alterar ciclo final e salvar Abrangência Comercial";
+
+		String validacao = config.Msg("MsgInclui");
+
+		linhaplanilha = linha.Pegalinha(teste);
+
+		AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
+
+		AbrangComercialPage.AguardaXPath(telaabrangcomercial);
+
+		AbrangComercialPage.InserirCodVenda("txtCodVenda", linhaplanilha[1]);
+		
+		AbrangComercialPage.statusTodos("statusTodos");
+
+		AbrangComercialPage.SelecionaStatus(linhaplanilha[2]);
+
+		AbrangComercialPage.ConsultarAbrangencia(consultar);
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		AbrangComercialPage.SelecionaAbrangencia("//*[@id=\"tbAbrangencia\"]/tbody/tr[1]/td[12]/a/i", acao, metodo);
 
 
-//          AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaocancelar, Validacao, teste , acao);
-      }
-      @Test
-      public void SalvarAbrang() throws InterruptedException
-      {
-          String acao = "salvar";
+		AbrangComercialPage.AguardaId("btnAlterar");
+		
+		AbrangComercialPage.AlterarOuSalvar("btnAlterar");
+		
+		AbrangComercialPage.AguardaId("cicloInicio");
+		
+		AbrangComercialPage.InsereCiclo("cicloInicio", linhaplanilha[3]);
 
-          String linha = "Rascunho";
+		AbrangComercialPage.AguardaId("cicloTermino");
+		
+		AbrangComercialPage.InsereCiclo("cicloTermino", linhaplanilha[4]);
+		
+		AbrangComercialPage.AguardaId("btnSalvar");
+		
+		AbrangComercialPage.AlterarOuSalvar("btnSalvar");
 
-          String teste = "Alterar ciclo final e salvar Abrangência Comercial";
+		AbrangComercialPage.AguardaXPath(mensagemresultado);
 
-          String Validacao = " Registro salvo com sucesso!";
-//
-//          var linhaplanilha = ExcellAcess.PegaLinha(linha);
+		AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
+	}
 
-          AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
+	@Test
+	public void ExcluiRascunhoAbrang()  {
+		String acao = "excluir";
 
-          AbrangComercialPage.AguardaXPath(telaabrangcomercial);
+		String teste = "Rascunho";
 
-//          AbrangComercialPage.InserirCodVenda("txtCodVenda", linhaplanilha.CodVendaProduto);
+		String metodo = "Excluir Rascunho Abrangência Comercial ";
 
-          AbrangComercialPage.SelecionaStatus(Aprovado);
+		String validacao = config.Msg("MsgExclui");
 
-//          AbrangComercialPage.SelecionaStatus(linhaplanilha.Status);
+		linhaplanilha = linha.Pegalinha(teste);
 
-          AbrangComercialPage.ConsultarAbrangencia(consultar);
+		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, teste, acao);
 
-          Thread.sleep(2000);
+	}
 
-          AbrangComercialPage.SelecionaAbrangencia("//*[@id=\"tbAbrangencia\"]/tbody/tr[1]/td[12]/a/i" , acao , teste);
+	public void AprovaCancelaouExclui(String status, String codvenda, String botao, String texto, String teste, String acao) {
+		
+		AbrangComercialPage.AguardaXPath(telaabrangcomercial);
 
-          AbrangComercialPage.AguardaId("cicloTermino");
+		AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
 
-          AbrangComercialPage.AlterarOuSalvar("btnAlterar");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		AbrangComercialPage.InserirCodVenda(campocodvenda, codvenda);
 
-          AbrangComercialPage.AguardaId("cicloTermino");
+		if (Aprovado != status) {
+			AbrangComercialPage.SelecionaStatus(Aprovado);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			AbrangComercialPage.SelecionaStatus(status);
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-//          AbrangComercialPage.InsereCiclo("cicloTermino", linhaplanilha.CicloFim);
+		AbrangComercialPage.ConsultarAbrangencia(consultar);
 
-          Thread.sleep(1000);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-          AbrangComercialPage.AlterarOuSalvar("btnSalvar");
+		AbrangComercialPage.SelecionaAbrangencia(linhagrid, acao, teste);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-          AbrangComercialPage.AguardaXPath(mensagemresultado);
+		AbrangComercialPage.acao(botao);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-//          AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
-      }
-    @Test
-    public void ExcluiRascunhoAbrang()
-    {
-        String acao = "excluir";
-
-        String linha = "Rascunho";
-
-        String teste = "Excluir Rascunho Abrangência Comercial ";
-
-        String Validacao = " Registros excluídos com sucesso!";
-//
-//        var linhaplanilha = ExcellAcess.PegaLinha(linha);
-
-//        AprovaCancelaouExclui(linhaplanilha.Status, linhaplanilha.CodVendaProduto, botaoexcluir, Validacao, teste , acao);
-    }
+		AbrangComercialPage.Confirma(confirmar);
 
 
-    public void AprovaCancelaouExclui(String status, String codvenda, String botao, String texto, String teste , String acao) throws InterruptedException
-    {
-
-        AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
-
-        AbrangComercialPage.AguardaXPath(telaabrangcomercial);
-
-        AbrangComercialPage.InserirCodVenda(campocodvenda, codvenda);
-
-        if (Aprovado != status)
-        {
-            AbrangComercialPage.SelecionaStatus(Aprovado);
-            AbrangComercialPage.SelecionaStatus(status);
-        }
-
-        AbrangComercialPage.ConsultarAbrangencia(consultar);
-
-        Thread.sleep(3000);
-
-        AbrangComercialPage.SelecionaAbrangencia(linhagrid , acao , teste);
-
-        AbrangComercialPage.acao(botao);
-
-        AbrangComercialPage.Confirma(confirmar);
-
-        AbrangComercialPage.AguardaXPath(mensagemresultado);
-
-        AbrangComercialPage.ValidaTextoMensagem(telaerro,mensagemresultado, texto, teste);
-    }
+		AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, texto, teste);
+	}
 }
-

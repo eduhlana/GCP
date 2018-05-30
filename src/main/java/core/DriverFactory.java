@@ -16,7 +16,7 @@ public class DriverFactory {
             if (driver == null)
             {
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("-incognito");
+               // options.addArguments("-incognito");
                 String pathselenium = "C:\\Users\\eduardo.lana\\.nuget\\packages\\selenium.webdriver.chromedriver\\2.37.0\\driver\\win32\\chromedriver.exe";
                 System.setProperty("webdriver.chrome.driver", pathselenium);
                 driver = new ChromeDriver(options); 

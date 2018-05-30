@@ -9,6 +9,8 @@ import core.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.ElementNotVisibleException;
 
 /**
  *
@@ -51,22 +53,27 @@ public class PrecoPage extends BasePage{
     }
     public void AguardaId(String texto)
     {
-        EsperaCarregamento(texto);
+        EsperaCarregamento(By.id(texto));
     }
     public void AguardaXPath(String texto)
     {
-        EsperaCarregamento(texto);
+        EsperaCarregamento(By.xpath(texto));
     }
+      	
+    
+    
     public void ValidaTextoMensagem(String telaerro, String Texto, String Texto1, String teste)
     {
-     try {
          ValidaMensagemPopup(By.xpath(telaerro), By.xpath(Texto), Texto1, teste);
-     } catch (InterruptedException ex) {
-         Logger.getLogger(PrecoPage.class.getName()).log(Level.SEVERE, null, ex);
-     }
+    
 
     }
     public void SelecionaStatus(String status)
+    {
+        Status(By.xpath("//input[@name='statusAprovacaoPreco'and @value='" + status + "']"));
+    }
+    
+    public void SelecionaStatusPreco(String status)
     {
         Status(By.xpath("//input[@name='statusAprovacao'and @value='" + status + "']"));
     }
@@ -126,6 +133,18 @@ public class PrecoPage extends BasePage{
     {
         Escrever(By.id(texto), prioridade);
     }
+	public void StatusTodos(String string) {
+		acao(By.id("statusTodos"));
+		
+	}
+	public String PegaCiclo(String texto) {
+		
+		return ObtemCiclo(By.xpath(texto));
+	}
+	public String PegaMensagemResultado(String texto) {
+		
+		return resultado(By.xpath(texto));
+	}
 }
     
 

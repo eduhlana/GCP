@@ -11,6 +11,7 @@ public class BaseTest {
      public void Inicializa()
        {
             DriverFactory.GetDriver().navigate().to("http://hml3-naturahml.sysmap.com.br/gcpweb/");
+    		
             DriverFactory.GetDriver().manage().window().maximize();
             
        }
