@@ -4,6 +4,7 @@ package core;
 public class MsgConfig {
 
 	public String Msg(String msg) {
+		
 		String mensagem = "";
 		switch (msg) {
 		case "URL":
@@ -22,10 +23,10 @@ public class MsgConfig {
 			mensagem = " Registro aprovado com sucesso!";
 			break;
 		case "MsgAprovaPreco":
-			mensagem = " AprovaÃ§Ã£o solicitada com sucesso! Aguarde a finalizaÃ§Ã£o do processamento.";
+			mensagem = " Aprovação solicitada com sucesso! Aguarde a finalização do processamento.";
 			break;
 		case "MsgCancelaPreco":
-			mensagem = " Cancelamento solicitado com sucesso! Aguarde a finalizaÃ§Ã£o do processamento.";
+			mensagem = " Cancelamento solicitado com sucesso! Aguarde a finalização do processamento.";
 			break;
 		case "MsgCancel":
 			mensagem = " Registros cancelados com sucesso!";
@@ -34,7 +35,7 @@ public class MsgConfig {
 			mensagem = " Registro cancelado com sucesso!";
 			break;
 		case "MsgExclui":
-			mensagem = " Registros excluÃ­dos com sucesso!";
+			mensagem = " Registros excluídos com sucesso!";
 			break;
 		case "MsgInclui":
 			mensagem = " Registro salvo com sucesso!";

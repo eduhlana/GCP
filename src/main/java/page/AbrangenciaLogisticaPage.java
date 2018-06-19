@@ -119,7 +119,7 @@ public class AbrangenciaLogisticaPage extends BasePage {
 
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			acao(By.id(texto));
 			Thread.sleep(2000);
 			

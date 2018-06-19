@@ -28,7 +28,7 @@ public class AbrangComercialPage extends BasePage {
 	}
 
 	public void SelecionarAbrang(String texto) {
-		acao(By.xpath(texto));
+		checked(By.xpath(texto));
 	}
 
 	public void InsereCiclo(String texto, String ciclo) {
@@ -54,8 +54,8 @@ public class AbrangComercialPage extends BasePage {
 	}
 
 	public void ValidaTextoMensagem(String telaerro, String Texto, String Texto1, String teste) {
-			
-		ValidaMensagemPopup(By.xpath(telaerro), By.xpath(Texto), Texto1, teste);
+		
+		ValidaMensagemPopupComercial(By.xpath(telaerro), By.xpath(Texto), Texto1, teste);
 
 	}
 
@@ -103,5 +103,6 @@ public class AbrangComercialPage extends BasePage {
 		return ObtemCicloComercial(By.tagName(texto));
 		
 	}
+	
 
 }
