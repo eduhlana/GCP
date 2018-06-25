@@ -5,10 +5,6 @@ import core.BasePage;
 
 public class LoginPage extends BasePage{
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 	public void Setusuario(String user , String usuario) {
 		
 		Escrever(By.id(user),usuario);

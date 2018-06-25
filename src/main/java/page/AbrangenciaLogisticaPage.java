@@ -42,12 +42,14 @@ public class AbrangenciaLogisticaPage extends BasePage {
 		try {
 			acao(By.id(texto));
 			Thread.sleep(2000);
+                        SelectValue(By.id(texto), ciclo);
+                        Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		SelectValue(By.id(texto), ciclo);
+	
 	}
 
 	public void Aguardaid(String texto) {
@@ -122,11 +124,12 @@ public class AbrangenciaLogisticaPage extends BasePage {
 			Thread.sleep(2000);
 			acao(By.id(texto));
 			Thread.sleep(2000);
+                        SelectValue(By.id(texto), material);
 			
 		} catch (InterruptedException ex) {
 			Logger.getLogger(AbrangenciaLogisticaPage.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		SelectValue(By.id(texto), material);
+		
 	}
 
 	public void InserePrioridade(String texto, String prioridade) {

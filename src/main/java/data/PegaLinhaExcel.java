@@ -16,11 +16,6 @@ public class PegaLinhaExcel {
 
 	public static String[] planilha = new String[12];
 	MsgConfig config = new MsgConfig();
-
-	public static void main(String[] args) {
-
-	};
-
 	public String[] Pegalinha(String nometeste) {
 
 		String excel = config.Msg("Excel");

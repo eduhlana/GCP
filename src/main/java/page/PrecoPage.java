@@ -33,13 +33,15 @@ public class PrecoPage extends BasePage{
     }
     public void SelecionaMotivo(String texto, String motivo)
     {
-        acao(By.id(texto));
      try {
          Thread.sleep(2000);
+         acao(By.id(texto));
+         Thread.sleep(2000);
+         SelectValue(By.id(texto), motivo);
      } catch (InterruptedException ex) {
-         Logger.getLogger(PrecoPage.class.getName()).log(Level.SEVERE, null, ex);
+         
      }
-        SelectValue(By.id(texto), motivo);
+       
     }
 
     public void SelecionarAbrang(String texto)
@@ -48,8 +50,12 @@ public class PrecoPage extends BasePage{
     }
     public void InsereCiclo(String texto, String ciclo)
     {
-        acao(By.id(texto));
-        SelectValue(By.id(texto), ciclo);
+        try{
+            acao(By.id(texto));
+            Thread.sleep(800);
+            SelectValue(By.id(texto), ciclo);
+        }catch(InterruptedException ex){
+        }
     }
     public void AguardaId(String texto)
     {
@@ -134,7 +140,7 @@ public class PrecoPage extends BasePage{
         Escrever(By.id(texto), prioridade);
     }
 	public void StatusTodos(String string) {
-		acao(By.id("statusTodos"));
+		checked(By.id("statusTodos"));
 		
 	}
 	public String PegaCiclo(String texto) {
