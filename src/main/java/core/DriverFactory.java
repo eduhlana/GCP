@@ -15,7 +15,7 @@ public class DriverFactory {
 
         public static WebDriver GetDriver()
         {
-            String browser = "fefox";
+            String browser = "firefox";
 
             if (driver == null)
             {
