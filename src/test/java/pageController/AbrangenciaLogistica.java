@@ -71,20 +71,30 @@ public class AbrangenciaLogistica extends BaseTest {
             AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
 
             AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.Aguardaid(campocodvenda);
 
             AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha[1]);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             AbrangLogisticaPage.Aguardaid("statusTodos");
             
             AbrangLogisticaPage.StatusTodos("statusTodos");
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.Aguardaxpath(gridcomercial);
 
             AbrangLogisticaPage.SelecionaAbrangencia(gridcomercial);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.Aguardaxpath(lupaalterar);
             
@@ -96,26 +106,39 @@ public class AbrangenciaLogistica extends BaseTest {
             
             AbrangLogisticaPage.Incluir(botaoincluir);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             AbrangLogisticaPage.Aguardaxpath("//*[@id=\"incluirForm\"]/div[2]/div[4]/div[1]/div/div[1]/div/label[2]");
             
             String material = linhaplanilha[5].replace(".","");
             		
             AbrangLogisticaPage.SelecionaMaterial(campomaterial , material);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.InserePrioridade(campoprioridade, linhaplanilha[6]);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             String cicloini = AbrangLogisticaPage.ObtercicloComercial(cicloinicomercialincl);
+            
 
             AbrangLogisticaPage.InsereCiclo(campocicloinicial , cicloini);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             String ciclofim = AbrangLogisticaPage.ObtercicloComercial(ciclofimcomercialincl);
             
             if (!"".equals(ciclofim)) {
             
             	AbrangLogisticaPage.InsereCiclo(campociclofinal , ciclofim);
+            	
+            	AbrangLogisticaPage.TakescreenShot(metodo);
             }
 
             AbrangLogisticaPage.Incluir("btnAddSessionItem");
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
 	        try {
 	            Thread.sleep(3000);
@@ -126,9 +149,13 @@ public class AbrangenciaLogistica extends BaseTest {
            AbrangLogisticaPage.Aguardaxpath("//*[@id=\"tbProdutoAbrangenciaItem\"]/tbody/tr/td[8]/input");
            
             AbrangLogisticaPage.AlterarOuSalvar("btnSalvar");
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
           
 
             AbrangLogisticaPage.Aguardaxpath(mensagemresultado);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado,  validacao, metodo);
          
@@ -153,7 +180,7 @@ public class AbrangenciaLogistica extends BaseTest {
             linhaplanilha = linha.Pegalinha(teste);
 
       
-           Acao(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo , acao );
+           Acao(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo , acao ,metodo );
 
 
         }
@@ -172,7 +199,7 @@ public class AbrangenciaLogistica extends BaseTest {
             linhaplanilha = linha.Pegalinha(teste);
 
 
-            Acao(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo , acao );
+            Acao(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo , acao ,metodo);
         }
 
 
@@ -189,6 +216,8 @@ public class AbrangenciaLogistica extends BaseTest {
             AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
             
             AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.InserirCodVenda(campocodvenda, linhaplanilha[1]);
          
@@ -198,23 +227,35 @@ public class AbrangenciaLogistica extends BaseTest {
                 Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             
             AbrangLogisticaPage.InsereCiclo("cicloInicioPesquisa" , linhaplanilha[3]);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             AbrangLogisticaPage.StatusTodos("statusTodos");
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             
             AbrangLogisticaPage.Aguardaid(consultar);
 
             AbrangLogisticaPage.ConsultarAbrangenciaLog(consultar);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.Aguardaxpath(gridcomercial);
 
             AbrangLogisticaPage.SelecionaAbrangencia(gridcomercial);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             AbrangLogisticaPage.Aguardaxpath(lupaalterar);
 
             AbrangLogisticaPage.SelecionaAbrangencia(lupaalterar);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
              try {
                 Thread.sleep(2000);
@@ -226,36 +267,53 @@ public class AbrangenciaLogistica extends BaseTest {
              
             AbrangLogisticaPage.AlterarOuSalvar(botaoAlterar);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
 
             AbrangLogisticaPage.Aguardaid(campociclofinal);
             
             AbrangLogisticaPage.Aguardaxpath(linhamaterial);
 
             AbrangLogisticaPage.SelecionaMaterial(linhamaterial);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.acao("btnRemoveSessionItems");
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             String materiall = linhaplanilha[5].replace(".","");
             
             AbrangLogisticaPage.Aguardaid(campomaterial);
             
             AbrangLogisticaPage.SelecionaMaterial(campomaterial, materiall);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.InserePrioridade(campoprioridade,linhaplanilha[6]);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             String cicloini = AbrangLogisticaPage.ObtercicloComercial(cicloinicomercialialt);
 
             AbrangLogisticaPage.InsereCiclo(campocicloinicial ,cicloini);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
+            
             
             String ciclofim = AbrangLogisticaPage.ObtercicloComercial(ciclofimcomercialialt);
+            
             
             if (!"".equals(ciclofim)) {
                 
             	AbrangLogisticaPage.InsereCiclo(campociclofinal , ciclofim);
+            	
+            	AbrangLogisticaPage.TakescreenShot(metodo);
             }     
 
             AbrangLogisticaPage.acao("btnAddSessionItem");
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             
                try {
@@ -267,6 +325,8 @@ public class AbrangenciaLogistica extends BaseTest {
             AbrangLogisticaPage.acao("btnSalvar");
 
             AbrangLogisticaPage.Aguardaxpath(mensagemresultado);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
         }
@@ -285,16 +345,18 @@ public class AbrangenciaLogistica extends BaseTest {
 
             linhaplanilha = linha.Pegalinha(teste);
 
-            Acao(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, metodo , acao );
+            Acao(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, metodo , acao ,metodo);
         }
 
  
-        public void Acao(String status, String codvenda, String botao, String Validacao, String teste , String acao )
+        public void Acao(String status, String codvenda, String botao, String Validacao, String teste , String acao ,String metodo)
         {
 
             AbrangLogisticaPage.Aguardaxpath(telaabranglogistica);
 
             AbrangLogisticaPage.MenuAbrangLog(telaabranglogistica);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.Aguardaid(campocodvenda);
 
@@ -334,17 +396,23 @@ public class AbrangenciaLogistica extends BaseTest {
 
             AbrangLogisticaPage.SelecionaAbrangencia(gridcomercial);
             
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             AbrangLogisticaPage.Aguardaxpath(gridlogistica);
             
             AbrangLogisticaPage.SelecionaAbrangenciaLog(gridlogistica , acao , teste);
 
+            AbrangLogisticaPage.TakescreenShot(metodo);
             
             AbrangLogisticaPage.acao(botao);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.Aguardaxpath(confirmar);
 
             AbrangLogisticaPage.ConfirmaCancela(confirmar);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
 
 //        try {
@@ -353,6 +421,8 @@ public class AbrangenciaLogistica extends BaseTest {
 //            Logger.getLogger(AbrangenciaLogistica.class.getName()).log(Level.SEVERE, null, ex);
 //        }
             AbrangLogisticaPage.Aguardaxpath(mensagemresultado);
+            
+            AbrangLogisticaPage.TakescreenShot(metodo);
 
             AbrangLogisticaPage.ValidaTextoMensagem(telaerro, mensagemresultado, Validacao, teste);
 
