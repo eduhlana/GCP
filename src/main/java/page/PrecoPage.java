@@ -151,6 +151,10 @@ public class PrecoPage extends BasePage{
 		
 		return resultado(By.xpath(texto));
 	}
+        public void TakescreenShot(String texto) {
+		 testScreenshot(texto);
+		
+	}
 }
     
 

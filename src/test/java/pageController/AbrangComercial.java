@@ -67,6 +67,8 @@ public class AbrangComercial extends BaseTest {
 		AbrangComercialPage.AguardaXPath(telaabrangcomercial);
 
 		AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		try {
 			Thread.sleep(3000);
@@ -75,6 +77,8 @@ public class AbrangComercial extends BaseTest {
 		}
 
 		AbrangComercialPage.acao(botaoincluir);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -83,18 +87,32 @@ public class AbrangComercial extends BaseTest {
 
 		
 		AbrangComercialPage.AguardaId("codigoVendaProduto");
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.InserirCodVenda("codigoVendaProduto", linhaplanilha[1]);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.AguardaXPath(abrangencia);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.SelecionarAbrang(abrangencia);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.InsereCiclo("cicloInicioIncluir", linhaplanilha[3]);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.AlterarOuSalvar("btnSalvar");
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.AguardaXPath(mensagemresultado);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
 
@@ -118,7 +136,7 @@ public class AbrangComercial extends BaseTest {
 
 		linhaplanilha = linha.Pegalinha(teste);
 
-		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo, acao , telaerro );
+		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoaprovar, validacao, metodo, acao , telaerro ,metodo );
 
 	}
 
@@ -137,7 +155,7 @@ public class AbrangComercial extends BaseTest {
 
 		linhaplanilha = linha.Pegalinha(teste);
 
-		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo, acao ,telaerro );
+		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaocancelar, validacao, metodo, acao ,telaerro,metodo );
 	}
 
 	@Test
@@ -159,15 +177,25 @@ public class AbrangComercial extends BaseTest {
 		AbrangComercialPage.AguardaXPath(telaabrangcomercial);
 
 		AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 
 		AbrangComercialPage.InserirCodVenda("txtCodVenda", linhaplanilha[1]);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.statusTodos("statusTodos");
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.SelecionaStatus(linhaplanilha[2]);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.ConsultarAbrangencia(consultar);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		try {
 			Thread.sleep(2000);
@@ -180,20 +208,30 @@ public class AbrangComercial extends BaseTest {
 		AbrangComercialPage.AguardaId("btnAlterar");
 		
 		AbrangComercialPage.AlterarOuSalvar("btnAlterar");
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.AguardaId("cicloInicio");
 		
 		AbrangComercialPage.InsereCiclo("cicloInicio", linhaplanilha[3]);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.AguardaId("cicloTermino");
 		
 		AbrangComercialPage.InsereCiclo("cicloTermino", linhaplanilha[4]);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.AguardaId("btnSalvar");
 		
 		AbrangComercialPage.AlterarOuSalvar("btnSalvar");
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.AguardaXPath(mensagemresultado);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.ValidaTextoMensagem(telaerro, mensagemresultado, validacao, metodo);
 	}
@@ -213,20 +251,24 @@ public class AbrangComercial extends BaseTest {
 
 		linhaplanilha = linha.Pegalinha(teste);
 
-		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, teste, acao ,telaerro );
+		AprovaCancelaouExclui(linhaplanilha[2], linhaplanilha[1], botaoexcluir, validacao, teste, acao ,telaerro ,metodo );
 
 	}
 
-	public void AprovaCancelaouExclui(String status, String codvenda, String botao, String texto, String teste, String acao , String telaerro ) {
+	public void AprovaCancelaouExclui(String status, String codvenda, String botao, String texto, String teste, String acao , String telaerro ,String metodo ) {
 		
 		
 		AbrangComercialPage.AguardaXPath(telaabrangcomercial);
 
 		AbrangComercialPage.MenuAbrangComercial(telaabrangcomercial);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.AguardaId(campocodvenda);
 		
 		AbrangComercialPage.InserirCodVenda(campocodvenda, codvenda);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		if (!Aprovado.equals(status)) {
 			AbrangComercialPage.SelecionaStatus(Aprovado);
@@ -236,6 +278,7 @@ public class AbrangComercial extends BaseTest {
 				
 			}
 			AbrangComercialPage.SelecionaStatus(status);
+                        AbrangComercialPage.TakescreenShot(metodo);
 		}
 		try {
 			Thread.sleep(3000);
@@ -243,6 +286,8 @@ public class AbrangComercial extends BaseTest {
 		}
 
 		AbrangComercialPage.ConsultarAbrangencia(consultar);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 
 		AbrangComercialPage.AguardaXPath(linhagrid);
 		
@@ -253,15 +298,21 @@ public class AbrangComercial extends BaseTest {
 		}
 		
 		AbrangComercialPage.SelecionaAbrangencia(linhagrid, acao, teste);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 	
 		
 		AbrangComercialPage.AguardaId(botao);
 		
 		AbrangComercialPage.acao(botao);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.AguardaXPath(confirmar);
 
 		AbrangComercialPage.Confirma(confirmar);
+                
+                AbrangComercialPage.TakescreenShot(metodo);
 		
 		AbrangComercialPage.AguardaXPath(mensagemresultado);
 

@@ -20,5 +20,9 @@ public class LoginPage extends BasePage{
 	public void AguardaXpath(String xpath) {
 		EsperaCarregamento(By.xpath(xpath));;
 	}
+        public void TakescreenShot(String texto) {
+		 testScreenshot(texto);
+		
+	}
 
 }

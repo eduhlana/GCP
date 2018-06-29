@@ -26,12 +26,11 @@ public class BasePage {
 	}
         
         protected void checked(By Element) {
-        
+            
             if(!DriverFactory.GetDriver().findElement(Element).isSelected()){
                 DriverFactory.GetDriver().findElement(Element).click();
             }
-		
-                
+		           
 	}
         
 
@@ -161,5 +160,8 @@ public class BasePage {
 			}
 		
 	}
-
+        
+        public void testScreenshot(String  test) { 
+            ScreenShots.takeScreenshot(test);
+        }
 }

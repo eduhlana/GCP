@@ -80,8 +80,7 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
             <version>3.6.0</version>
-            <type>jar</type>
-			
+            <type>jar</type>	
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -90,6 +89,25 @@
             <type>jar</type>
         </dependency>
     </dependencies>
+	<reporting>
+    <plugins>
+      <plugin>
+		<groupId>org.openclover</groupId>
+		<artifactId>clover-maven-plugin</artifactId>
+		<version>4.2.0</version>
+		<configuration>
+			<jdk>1.8</jdk>
+			<instrumentLambda>block</instrumentLambda>
+			<showInnerFunctions>true</showInnerFunctions>
+			<showLambdaFunctions>true</showLambdaFunctions>
+			<includesTestSourceRoots>true</includesTestSourceRoots>
+			<setTestFailureIgnore>true</setTestFailureIgnore>
+			<generateHistorical>true</generateHistorical>
+			<historyDir>${user.home}/.clover-history/${project.groupId}-${project.artifactId}</historyDir>
+  </configuration>
+</plugin>
+    </plugins>
+  </reporting>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>

@@ -21,7 +21,7 @@ public class AbrangenciaLogisticaPage extends BasePage {
 	}
 	
 	public void StatusTodos(String texto) {
-		acao(By.id(texto));
+		checked(By.id(texto));
 	}
 
 	public void Incluir(String texto) {
@@ -140,4 +140,8 @@ public class AbrangenciaLogisticaPage extends BasePage {
 		
 		return ObtemCiclo(By.xpath(texto));
 	};
+        public void TakescreenShot(String texto) {
+		 testScreenshot(texto);
+		
+	}
 }

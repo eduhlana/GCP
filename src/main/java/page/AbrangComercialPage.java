@@ -1,6 +1,7 @@
 package page;
 
 import core.BasePage;
+import core.ScreenShots;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,6 +102,10 @@ public class AbrangComercialPage extends BasePage {
 	}
 	public String ObtercicloComercial(String texto) {
 		return ObtemCicloComercial(By.tagName(texto));
+		
+	}
+        public void TakescreenShot(String texto) {
+		 testScreenshot(texto);
 		
 	}
 	
