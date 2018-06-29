@@ -146,7 +146,7 @@ public class AbrangenciaLogistica extends BaseTest {
 
             String acao = "aprovar";
 
-            String metodo = "Aprovar AbrangÃªncia LogÃ­stica";
+            String metodo = "Aprovar Abrangência Logística";
 
             String validacao = config.Msg("MsgAprovaLog");
 
@@ -163,7 +163,7 @@ public class AbrangenciaLogistica extends BaseTest {
         {
             String teste = "Aprovado";
 
-            String metodo = "Cancelar AbrangÃªncia Logistica";
+            String metodo = "Cancelar Abrangência Logistica";
 
             String acao = "cancelar";
 
@@ -180,7 +180,7 @@ public class AbrangenciaLogistica extends BaseTest {
         {
             String teste = "Encerrado";
 
-            String metodo = "Alterar e salvar AbrangÃªncia LogÃ­stica";
+            String metodo = "Alterar e salvar Abrangência Logística";
 
             String validacao = config.Msg("MsgInclui");
             

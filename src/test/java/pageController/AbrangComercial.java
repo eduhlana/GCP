@@ -130,7 +130,7 @@ public class AbrangComercial extends BaseTest {
 
 		String teste = "Rascunho";
 
-		String metodo = "Aprovar AbrangÃªncia Comercial";
+		String metodo = "Aprovar Abrangência Comercial";
 
 		String validacao = config.Msg("MsgAprova");
 
@@ -149,7 +149,7 @@ public class AbrangComercial extends BaseTest {
 
 		String teste = "Aprovado";
 
-		String metodo = "Cancelar AbrangÃªncia Comercial";
+		String metodo = "Cancelar Abrangência Comercial";
 
 		String validacao = config.Msg("MsgCancel");
 
@@ -245,7 +245,7 @@ public class AbrangComercial extends BaseTest {
 
 		String teste = "Rascunho";
 
-		String metodo = "Excluir Rascunho AbrangÃªncia Comercial ";
+		String metodo = "Excluir Rascunho Abrangência Comercial ";
 
 		String validacao = config.Msg("MsgExclui");
 

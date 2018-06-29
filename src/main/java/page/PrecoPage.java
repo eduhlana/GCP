@@ -6,12 +6,7 @@
 package page;
 
 import core.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.ElementNotVisibleException;
-
 /**
  *
  * @author eduardo.lana
