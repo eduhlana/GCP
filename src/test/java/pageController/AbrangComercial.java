@@ -19,7 +19,6 @@ public class AbrangComercial extends BaseTest {
 	public AbrangComercialPage AbrangComercialPage = new AbrangComercialPage();
 	public BasePage basepage = new BasePage();
 	public PegaLinhaExcel excel = new PegaLinhaExcel();
-	public Login Login = new Login();
 	MsgConfig config = new MsgConfig();
 	
 	String telaabrangcomercial = "//*[@id=\"sidebar\"]/ul/li[4]/a/span";

@@ -1,0 +1,7 @@
+#surefire
+#Mon Jul 02 15:29:32 BRT 2018
+maven.ext.class.path=E\:\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
+user.dir=E\:\\GCP
+localRepository=C\:\\Users\\eduardo.lana\\.m2\\repository
+basedir=E\:\\GCP
+test=pageController.AbrangComercial
